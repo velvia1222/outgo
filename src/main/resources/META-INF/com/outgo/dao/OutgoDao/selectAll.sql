@@ -1,0 +1,1 @@
+select * from outgo order by number;

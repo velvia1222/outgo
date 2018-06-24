@@ -1,2 +1,5 @@
+logs/
+out/
+src/main/gen/
 .gradle/
 .idea/

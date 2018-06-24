@@ -1,0 +1,9 @@
+mysql:
+    image: mysql:5.6
+    volumes:
+        - "./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+        - "./mysql/charset.cnf:/etc/mysql/conf.d/charset.cnf"
+    environment:
+        - MYSQL_ROOT_PASSWORD={password}
+    ports:
+        - "3306:3306"
