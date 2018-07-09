@@ -4,5 +4,5 @@
 - プラットフォーム：gcp
 - バックエンド言語：Java
 - バックエンドフレームワーク：Spring boot
-- フロントエンドフレームワーク：React
-- DB：sqlite
+- フロントエンドフレームワーク：Vue.js
+- DB：MySQL
