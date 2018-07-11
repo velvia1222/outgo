@@ -1,5 +1,6 @@
 package com.outgo;
 
+import com.outgo.controller.TestController;
 import com.outgo.dao.OutgoDao;
 import com.outgo.entity.Outgo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +18,15 @@ import java.util.List;
 @RestController
 public class OutgoApplication {
 
-	@Autowired
-	OutgoDao outgoDao;
-
 	public static void main(String[] args) {
 		SpringApplication.run(OutgoApplication.class, args);
 	}
 
+	@Autowired
+    TestController testController;
+
 	@RequestMapping(path = "/")
 	List<Outgo> all() {
-		return outgoDao.selectAll();
+		return testController.searchOutgo();
 	}
 }

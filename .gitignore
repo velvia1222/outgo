@@ -1,5 +1,8 @@
 logs/
 build/
 src/main/gen/
+node_modules/
 .gradle/
 .idea/
+docker/docker-compose.yml
+src/main/resources/config/application.yml
