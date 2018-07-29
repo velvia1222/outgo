@@ -1,4 +1,4 @@
-package com.outgo.dao;
+package com.outgo.repository;
 
 import com.outgo.entity.Outgo;
 import org.seasar.doma.Dao;
@@ -11,11 +11,7 @@ import java.util.List;
 
 @ConfigAutowireable
 @Dao
-public interface OutgoDao {
+public interface OutgoRepository {
     @Select
     List<Outgo> selectAll();
-
-    @Insert
-    @Transactional
-    int insert(Outgo outgo);
 }

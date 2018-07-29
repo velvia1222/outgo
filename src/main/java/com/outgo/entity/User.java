@@ -9,12 +9,10 @@ import org.seasar.doma.jdbc.entity.NamingType;
 
 @Entity(naming = NamingType.SNAKE_LOWER_CASE)
 @Data
-public class Outgo {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String status;
-    private String buyer;
-    private long amount;
-    private String category;
+    private String username;
+    private String password;
 }

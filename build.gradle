@@ -1,6 +1,7 @@
 buildscript {
     ext.versions = [
-        "springBoot": "2.0.3.RELEASE"
+        "springBoot": "1.5.14.RELEASE",
+        "powermock": "1.7.4"
     ]
     repositories {
         jcenter()
@@ -17,6 +18,7 @@ apply plugin: "org.springframework.boot"
 apply plugin: "io.spring.dependency-management"
 apply plugin: "com.google.cloud.tools.appengine"
 apply plugin: "idea"
+apply plugin: "eclipse"
 
 idea.module.outputDir = compileJava.destinationDir
 processResources.destinationDir = compileJava.destinationDir
@@ -34,11 +36,14 @@ repositories {
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-jdbc"
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-security")
     compile "org.seasar.doma.boot:doma-spring-boot-starter:1.1.1"
     compile "com.google.cloud.sql:mysql-socket-factory-connector-j-6:1.0.9"
     compileOnly "org.projectlombok:lombok:1.18.0"
     runtime "mysql:mysql-connector-java:6.0.6"
     testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "org.powermock:powermock-module-junit4:${versions.powermock}"
+    testCompile "org.powermock:powermock-api-mockito:${versions.powermock}"
 }
 
 appengine {

@@ -1,8 +1,10 @@
 logs/
 build/
+out/
 src/main/gen/
 node_modules/
 .gradle/
 .idea/
-docker/docker-compose.yml
 src/main/resources/config/application.yml
+docker/docker-compose.yml
+docker/mysql/docker-entrypoint-initdb.d/create_db.sql
