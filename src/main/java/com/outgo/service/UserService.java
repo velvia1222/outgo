@@ -1,9 +1,7 @@
 package com.outgo.service;
 
-import java.util.Collections;
 import java.util.Optional;
 
-import com.outgo.entity.User;
 import com.outgo.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +17,8 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) {
-        User user = Optional.ofNullable(userRepository.selectByUsername(username)).orElseThrow(
-                () -> new UsernameNotFoundException("username: " + username));
-        return new org.springframework.security.core.userdetails.User(
-                username,
-                user.getPassword(),
-                Collections.emptySet());
+        return Optional.ofNullable(userRepository.findByUsername(username))
+                .orElseThrow(
+                        () -> new UsernameNotFoundException("username: " + username));
     }
 }

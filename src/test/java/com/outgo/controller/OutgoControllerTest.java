@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 @PrepareForTest(SpringApplication.class)
 @PowerMockIgnore({"javax.management.*"})
 @SpringBootTest
-public class TestControllerTest {
+public class OutgoControllerTest {
 
     @Test(expected = RuntimeException.class)
     public void testSearchOutgoTest() throws Exception {
