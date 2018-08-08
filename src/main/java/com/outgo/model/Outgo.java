@@ -1,15 +1,21 @@
-package com.outgo.entity;
+package com.outgo.model;
 
 import lombok.Data;
+
+import java.sql.Timestamp;
+
 import org.seasar.doma.Entity;
 import org.seasar.doma.GeneratedValue;
 import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
-import org.seasar.doma.jdbc.entity.NamingType;
+import org.seasar.doma.Table;
 
-@Entity(naming = NamingType.SNAKE_LOWER_CASE)
+@Entity
+@Table(name = "outgo")
 @Data
 public class Outgo {
+    private Timestamp created_at;
+    private Timestamp modified_at;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

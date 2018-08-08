@@ -1,14 +1,18 @@
 package com.outgo.repository;
 
-import org.seasar.doma.Dao;
-import org.seasar.doma.Select;
-import org.seasar.doma.boot.ConfigAutowireable;
+import com.outgo.dao.UserDao;
+import com.outgo.model.User;
 
-import com.outgo.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-@ConfigAutowireable
-@Dao
-public interface UserRepository {
-    @Select
-    User selectByUsername(String username);
+@Repository
+public class UserRepository {
+
+    @Autowired
+    private UserDao userDao;
+
+    public User findByUsername(String username) {
+        return userDao.selectByUsername(username);
+    }
 }

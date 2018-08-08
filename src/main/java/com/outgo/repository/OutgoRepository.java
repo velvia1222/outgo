@@ -1,17 +1,30 @@
 package com.outgo.repository;
 
-import com.outgo.entity.Outgo;
-import org.seasar.doma.Dao;
-import org.seasar.doma.Insert;
-import org.seasar.doma.Select;
-import org.seasar.doma.boot.ConfigAutowireable;
-import org.springframework.transaction.annotation.Transactional;
+import com.outgo.dao.OutgoDao;
+import com.outgo.model.Outgo;
+import com.outgo.model.Outgoes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+@Repository
+public class OutgoRepository {
 
-@ConfigAutowireable
-@Dao
-public interface OutgoRepository {
-    @Select
-    List<Outgo> selectAll();
+    @Autowired
+    private OutgoDao outgoDao;
+
+    public Outgoes findNonProcessing() {
+        return new Outgoes(outgoDao.selectNonProcessing());
+    }
+
+    public void save(Outgo outgo) {
+        if (outgo.getId() == 0) {
+            outgoDao.insert(outgo);
+        } else {
+            outgoDao.update(outgo);
+        }
+    }
+
+    public void delete(Outgo outgo) {
+        outgoDao.delete(outgo);
+    }
 }
