@@ -14,7 +14,17 @@ public class OutgoService {
     @Autowired
     private OutgoRepository outgoRepository;
 
-    public List<OutgoResource> list() {
-        return outgoRepository.findNonProcessing().asList().stream().map(outgo -> new OutgoResource(outgo)).collect(Collectors.toList());
+    public List<OutgoResource> findNonProcessing() {
+        return outgoRepository.findNonProcessing().asList().stream()
+                .map(outgo -> new OutgoResource(outgo))
+                .collect(Collectors.toList());
+    }
+
+    public void save(OutgoResource outgoResource) {
+        outgoRepository.save(outgoResource.toOutgo());
+    }
+
+    public void delete(OutgoResource outgoResource) {
+        outgoRepository.delete(outgoResource.toOutgo());
     }
 }

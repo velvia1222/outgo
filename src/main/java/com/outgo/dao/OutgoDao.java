@@ -9,13 +9,14 @@ import org.seasar.doma.boot.ConfigAutowireable;
 
 import java.util.List;
 
+import com.outgo.domain.Status;
 import com.outgo.model.Outgo;
 
 @ConfigAutowireable
 @Dao
 public interface OutgoDao {
     @Select
-    List<Outgo> selectNonProcessing();
+    List<Outgo> selectByStatus(Status status);
 
     @Insert
     int insert(Outgo outgo);

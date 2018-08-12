@@ -1,6 +1,7 @@
 package com.outgo.repository;
 
 import com.outgo.dao.OutgoDao;
+import com.outgo.domain.Status;
 import com.outgo.model.Outgo;
 import com.outgo.model.Outgoes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ public class OutgoRepository {
     private OutgoDao outgoDao;
 
     public Outgoes findNonProcessing() {
-        return new Outgoes(outgoDao.selectNonProcessing());
+        return new Outgoes(outgoDao.selectByStatus(Status.NON_PROCESSING));
     }
 
     public void save(Outgo outgo) {
