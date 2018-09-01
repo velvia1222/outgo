@@ -3,6 +3,7 @@ package com.outgo.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.outgo.domain.Status;
 import com.outgo.repository.OutgoRepository;
 import com.outgo.resource.OutgoResource;
 
@@ -20,7 +21,12 @@ public class OutgoService {
                 .collect(Collectors.toList());
     }
 
-    public void save(OutgoResource outgoResource) {
+    public void register(OutgoResource outgoResource) {
+        outgoResource.setStatus(Status.NON_PROCESSING.getValue());
+        outgoRepository.save(outgoResource.toOutgo());
+    }
+
+    public void update(OutgoResource outgoResource) {
         outgoRepository.save(outgoResource.toOutgo());
     }
 

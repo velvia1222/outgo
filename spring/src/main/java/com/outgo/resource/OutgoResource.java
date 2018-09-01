@@ -3,9 +3,11 @@ package com.outgo.resource;
 import com.outgo.domain.Status;
 import com.outgo.model.Outgo;
 
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
+@Data
+@NoArgsConstructor
 public class OutgoResource {
     private long id;
     private String status;

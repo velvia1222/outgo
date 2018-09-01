@@ -5,6 +5,7 @@ import com.outgo.service.OutgoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,20 +25,20 @@ public class OutgoController {
     }
 
     @RequestMapping(path = "/api/outgoes", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void post(OutgoResource outgoResource) {
-        outgoService.save(outgoResource);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void post(@RequestBody OutgoResource outgoResource) {
+        outgoService.register(outgoResource);
     }
 
     @RequestMapping(path = "/api/outgoes", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void put(OutgoResource outgoResource) {
-        outgoService.save(outgoResource);
+    public void put(@RequestBody OutgoResource outgoResource) {
+        outgoService.update(outgoResource);
     }
 
-    @RequestMapping(path = "/api/outgoes/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/api/outgoes/", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(OutgoResource outgoResource) {
+    public void delete(@RequestBody OutgoResource outgoResource) {
         outgoService.delete(outgoResource);
     }
 }

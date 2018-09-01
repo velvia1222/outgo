@@ -18,7 +18,7 @@ public interface OutgoDao {
     @Select
     List<Outgo> selectByStatus(Status status);
 
-    @Insert
+    @Insert(excludeNull = true)
     int insert(Outgo outgo);
 
     @Update

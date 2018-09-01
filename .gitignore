@@ -2,6 +2,7 @@
 .idea
 .settings
 .gradle
+spring/bin/
 spring/build/
 spring/src/main/gen/
 spring/src/main/resources/public/dist/
