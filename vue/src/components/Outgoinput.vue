@@ -1,25 +1,32 @@
 <template>
   <section class="section">
     <b-field>
-      <b-input v-model="amount" placeholder="outgo"></b-input>
+      <input class="input" v-model="amount" @keyup.enter="enter">
     </b-field>
     <b-field>
-      <b-select v-model="buyer" placeholder="Select a name">
-        <option value="n">n</option>
-        <option value="y">y</option>
-      </b-select>
+      <div class="select">
+        <select v-model="buyer" @keyup.enter="enter">
+          <option>n</option>
+          <option>y</option>
+        </select>
+      </div>
     </b-field>
     <b-field>
-      <b-select v-model="category" placeholder="Select a category">
-        <option value="食費">食費</option>
-        <option value="日用品">日用品</option>
-        <option value="外食費">外食費</option>
-        <option value="娯楽">娯楽</option>
-        <option value="光熱費">光熱費</option>
-        <option value="家賃">家賃</option>
-      </b-select>
+      <div class="select">
+        <select v-model="category" @keyup.enter="enter">
+          <option>食費</option>
+          <option>日用品</option>
+          <option>外食費</option>
+          <option>娯楽</option>
+          <option>光熱費</option>
+          <option>家賃</option>
+        </select>
+      </div>
     </b-field>
-    <a class="button" v-on:click="enter">Enter</a><a class="button">Cancel</a>
+    <b-field>
+      <button class="button" @click="enter">Enter</button>
+      <button class="button">Cancel</button>
+    </b-field>
   </section>
 </template>
 
@@ -29,14 +36,13 @@ import Cookies from 'js-cookie'
 
 export default {
   name: 'Outgoinput',
+  data () {
+    return {
+      buyer: 'n',
+      category: '食費'
+    }
+  },
   methods: {
-    data() {
-      return {
-        amount: '',
-        buyer: '',
-        category: '',
-      }
-    },
     enter() {
       axios({
         url: '/api/outgoes/',
