@@ -25,7 +25,7 @@
     </b-field>
     <b-field>
       <button class="button" @click="enter">Enter</button>
-      <button class="button">Cancel</button>
+      <button class="button" @click="goList">Cancel</button>
     </b-field>
   </section>
 </template>
@@ -56,6 +56,9 @@ export default {
           'category': this.category,
         }
       })
+    },
+    goList() {
+      this.$router.push("/outgoes")
     }
   }
 }
