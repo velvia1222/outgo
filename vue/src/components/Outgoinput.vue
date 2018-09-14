@@ -36,26 +36,41 @@ import Cookies from 'js-cookie'
 
 export default {
   name: 'Outgoinput',
-  data () {
-    return {
-      buyer: 'n',
-      category: '食費'
+  data() {
+    if ('id' in this.$route.params) {
+      this.id = this.$route.params.id
+      return {
+        amount: this.$route.params.amount,
+        buyer: this.$route.params.buyer,
+        category: this.$route.params.category
+      }
+    } else {
+      return {
+        amount: '',
+        buyer: 'n',
+        category: '食費'
+      }
     }
   },
   methods: {
     enter() {
+      let data = {
+        'amount': this.amount,
+        'buyer': this.buyer,
+        'category': this.category,
+      }
+      if ('id' in this) {
+        data['id'] = this.id
+      }
       axios({
         url: '/api/outgoes/',
         method: 'POST',
         headers: {
           'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
         },
-        data: {
-          'amount': this.amount,
-          'buyer': this.buyer,
-          'category': this.category,
-        }
+        data: data
       })
+      this.$router.push("/outgoes")
     },
     goList() {
       this.$router.push("/outgoes")

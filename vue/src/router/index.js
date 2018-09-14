@@ -9,6 +9,10 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/outgoinput'
+    },
+    {
+      path: '/outgoinput',
       name: 'Outgoinput',
       component: Outgoinput
     },

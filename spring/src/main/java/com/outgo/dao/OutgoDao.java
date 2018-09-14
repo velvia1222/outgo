@@ -21,7 +21,7 @@ public interface OutgoDao {
     @Insert(excludeNull = true)
     int insert(Outgo outgo);
 
-    @Update
+    @Update(excludeNull = true)
     int update(Outgo outgo);
 
     @Delete
