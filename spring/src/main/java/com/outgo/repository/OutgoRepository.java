@@ -13,6 +13,10 @@ public class OutgoRepository {
     @Autowired
     private OutgoDao outgoDao;
 
+    public Outgo find(long id) {
+        return outgoDao.selectById(id);
+    }
+
     public Outgoes findNonProcessing() {
         return new Outgoes(outgoDao.selectByStatus(Status.NON_PROCESSING));
     }

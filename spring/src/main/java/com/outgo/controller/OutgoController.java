@@ -1,5 +1,6 @@
 package com.outgo.controller;
 
+import com.outgo.resource.OutgoIdsResource;
 import com.outgo.resource.OutgoResource;
 import com.outgo.service.OutgoService;
 
@@ -38,7 +39,13 @@ public class OutgoController {
 
     @RequestMapping(path = "/api/outgoes/", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@RequestBody OutgoResource outgoResource) {
-        outgoService.delete(outgoResource);
+    public void delete(@RequestBody OutgoIdsResource outgoIdsResource) {
+        outgoService.delete(outgoIdsResource);
+    }
+
+    @RequestMapping(path = "/api/outgoes/pay", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void pay(@RequestBody OutgoIdsResource outgoIdsResource) {
+        outgoService.pay(outgoIdsResource);
     }
 }

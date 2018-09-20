@@ -16,6 +16,9 @@ import com.outgo.model.Outgo;
 @Dao
 public interface OutgoDao {
     @Select
+    Outgo selectById(long id);
+
+    @Select
     List<Outgo> selectByStatus(Status status);
 
     @Insert(excludeNull = true)

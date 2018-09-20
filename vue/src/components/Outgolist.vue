@@ -1,29 +1,34 @@
 <template>
   <section class="section">
-    <b-field>
-      <button class="button" @click="goInput">Back</button>
-    </b-field>
-    <b-table
-      :data="data"
-      checkable>
-      <template slot-scope="props">
-        <b-table-column field="buyer" label="Buyer">
-          {{ props.row.buyer }}
-        </b-table-column>
-        <b-table-column field="amount" label="Amount">
-          {{ props.row.amount }}
-        </b-table-column>
-        <b-table-column field="category" label="Category">
-          {{ props.row.category }}
-        </b-table-column>
-        <b-table-column field="edit" label="Edit">
-          <button class="button" @click="edit(props.index)">Edit</button>
-        </b-table-column>
-        <b-table-column field="remove" label="Remove">
-          <button class="button" @click="remove(props.row.id)">Remove</button>
-        </b-table-column>
-      </template>
-    </b-table>
+    <div class="container">
+      <b-field>
+        <button class="button" @click="goInput">Back</button>
+        <button class="button is-info" @click="confirmPay">Pay</button>
+      </b-field>
+      <b-table
+        :data="outgoes"
+        :checked-rows.sync="checkedRows"
+        :mobile-cards="false"
+        checkable>
+        <template slot-scope="props">
+          <b-table-column field="buyer" label="Buyer">
+            {{ props.row.buyer }}
+          </b-table-column>
+          <b-table-column field="amount" label="Amount" numeric>
+            {{ props.row.amount }}
+          </b-table-column>
+          <b-table-column field="category" label="Category">
+            {{ props.row.category }}
+          </b-table-column>
+          <b-table-column field="edit" label="Edit">
+            <button class="button" @click="edit(props.index)">Edit</button>
+          </b-table-column>
+          <b-table-column field="remove" label="Remove">
+            <button class="button" @click="confirmRemove(props.index)">Remove</button>
+          </b-table-column>
+        </template>
+      </b-table>
+    </div>
   </section>
 </template>
 
@@ -35,39 +40,19 @@ export default {
   name: 'Outgolist',
   data() {
     return {
-      data: [
-        {
-          id: 1,
-          buyer: 'y',
-          amount: '400',
-          category: '娯楽'
-        },
-        {
-          id: 2,
-          buyer: 'n',
-          amount: '200',
-          category: '食費'
-        },
-        {
-          id: 3,
-          buyer: 'n',
-          amount: '100',
-          category: '日用品'
-        },
-        {
-          id: 4,
-          buyer: 'y',
-          amount: '300',
-          category: '食費'
-        }
-      ]
+      loading: false,
+      outgoes: [],
+      checkedRows: []
     }
   },
   created() {
-    this.fetchData()
+    this.fetchOutgoes()
+  },
+  watch: {
+    '$route': 'fetchOutgoes'
   },
   methods: {
-    fetchData() {
+    fetchOutgoes() {
       this.loading = true
       axios({
         url: '/api/outgoes/',
@@ -76,23 +61,86 @@ export default {
           'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
         }
       }).then(response => {
-        this.data = response.data
+        this.outgoes = response.data
         this.loading = false
       })
     },
     edit(index) {
       this.$router.push({name: 'Outgoinput', params: {
-          id: this.data[index].id,
-          amount: this.data[index].amount,
-          buyer: this.data[index].buyer,
-          category: this.data[index].category
+          id: this.outgoes[index].id,
+          amount: this.outgoes[index].amount,
+          buyer: this.outgoes[index].buyer,
+          category: this.outgoes[index].category
       }})
     },
+    confirmRemove(index) {
+      let outgo = this.outgoes[index]
+      this.$dialog.confirm({
+        message: outgo.buyer + " " + outgo.amount + "を削除します",
+        onConfirm: () => this.remove(index)
+      })
+    },
     remove(index) {
-      alert(index)
+      this.loading = true
+      let ids = []
+      ids.push(this.outgoes[index].id)
+      axios({
+        url: '/api/outgoes/',
+        method: 'DELETE',
+        headers: {
+          'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
+        },
+        data: {ids: ids}
+      }).then(response => {
+        this.fetchOutgoes()
+        this.loading = false
+      })
     },
     goInput() {
       this.$router.push("/outgoinput")
+    },
+    confirmPay() {
+      let amountY = 0
+      let amountN = 0
+      let payment = 0
+      let payer = ''
+      for (let outgo of this.checkedRows) {
+        if (outgo.buyer === 'y') {
+          amountY += Number(outgo.amount)
+        } else {
+          amountN += Number(outgo.amount)
+        }
+      }
+      if (amountN < amountY) {
+        payer = 'n'
+        payment = Math.floor((amountY - amountN) / 2)
+      } else {
+        payer = 'y'
+        payment = Math.floor((amountN - amountY) / 2)
+      }
+      this.$dialog.confirm({
+        message: payer + "が" + payment + "円支払ってください",
+        onConfirm: () => this.pay()
+      })
+    },
+    pay() {
+      this.loading = true
+      let ids = []
+      for (let outgo of this.checkedRows) {
+        ids.push(outgo.id)
+      }
+      axios({
+        url: '/api/outgoes/pay',
+        method: 'POST',
+        headers: {
+          'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
+        },
+        data: {ids: ids}
+      }).then(response => {
+        this.$toast.open("Pay!")
+        this.fetchOutgoes()
+        this.loading = false
+      })
     }
   }
 }
