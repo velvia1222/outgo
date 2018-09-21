@@ -1,34 +1,32 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <b-field>
-        <button class="button" @click="goInput">Back</button>
-        <button class="button is-info" @click="confirmPay">Pay</button>
-      </b-field>
-      <b-table
-        :data="outgoes"
-        :checked-rows.sync="checkedRows"
-        :mobile-cards="false"
-        checkable>
-        <template slot-scope="props">
-          <b-table-column field="buyer" label="Buyer">
-            {{ props.row.buyer }}
-          </b-table-column>
-          <b-table-column field="amount" label="Amount" numeric>
-            {{ props.row.amount }}
-          </b-table-column>
-          <b-table-column field="category" label="Category">
-            {{ props.row.category }}
-          </b-table-column>
-          <b-table-column field="edit" label="Edit">
+  <section class="section" style="width:550px">
+    <b-field>
+      <button class="button" @click="goInput">Back</button>
+      <button class="button is-info" @click="confirmPay">Pay</button>
+    </b-field>
+    <b-table
+      :data="outgoes"
+      :checked-rows.sync="checkedRows"
+      :mobile-cards="false"
+      checkable>
+      <template slot-scope="props">
+        <b-table-column field="buyer" label="Buyer" width="70">
+          {{ props.row.buyer }}
+        </b-table-column>
+        <b-table-column field="amount" label="Amount" width="100" numeric>
+          {{ props.row.amount }}
+        </b-table-column>
+        <b-table-column field="category" label="Category">
+          {{ props.row.category }}
+        </b-table-column>
+        <b-table-column width="110">
+          <nobr>
             <button class="button" @click="edit(props.index)">Edit</button>
-          </b-table-column>
-          <b-table-column field="remove" label="Remove">
             <button class="button" @click="confirmRemove(props.index)">Remove</button>
-          </b-table-column>
-        </template>
-      </b-table>
-    </div>
+          </nobr>
+        </b-table-column>
+      </template>
+    </b-table>
   </section>
 </template>
 

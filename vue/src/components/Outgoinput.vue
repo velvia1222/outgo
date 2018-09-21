@@ -1,34 +1,32 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <b-field>
-        <input class="input" v-model="amount" @keyup.enter="enter">
-      </b-field>
-      <b-field>
-        <div class="select">
-          <select v-model="buyer" @keyup.enter="enter">
-            <option>n</option>
-            <option>y</option>
-          </select>
-        </div>
-      </b-field>
-      <b-field>
-        <div class="select">
-          <select v-model="category" @keyup.enter="enter">
-            <option>食費</option>
-            <option>日用品</option>
-            <option>外食費</option>
-            <option>娯楽</option>
-            <option>光熱費</option>
-            <option>家賃</option>
-          </select>
-        </div>
-      </b-field>
-      <b-field>
-        <button class="button" @click="goList">Cancel</button>
-        <button class="button is-info" @click="enter">Enter</button>
-      </b-field>
-    </div>
+  <section class="section" style="width:200px">
+    <b-field>
+      <input class="input" v-model="amount" @keyup.enter="enter">
+    </b-field>
+    <b-field>
+      <div class="select">
+        <select v-model="buyer" @keyup.enter="enter">
+          <option>n</option>
+          <option>y</option>
+        </select>
+      </div>
+    </b-field>
+    <b-field>
+      <div class="select">
+        <select v-model="category" @keyup.enter="enter">
+          <option>食費</option>
+          <option>日用品</option>
+          <option>外食費</option>
+          <option>娯楽</option>
+          <option>光熱費</option>
+          <option>家賃</option>
+        </select>
+      </div>
+    </b-field>
+    <b-field>
+      <button class="button" @click="goList">Cancel</button>
+      <button class="button is-info" @click="enter">Enter</button>
+    </b-field>
   </section>
 </template>
 
