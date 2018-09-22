@@ -1,1 +1,1 @@
-select * from user where username = /* username */'y';
+select * from loginuser where username = /* username */'y';

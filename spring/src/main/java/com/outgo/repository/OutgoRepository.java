@@ -1,5 +1,8 @@
 package com.outgo.repository;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import com.outgo.dao.OutgoDao;
 import com.outgo.domain.Status;
 import com.outgo.model.Outgo;
@@ -25,6 +28,7 @@ public class OutgoRepository {
         if (outgo.getId() == 0) {
             outgoDao.insert(outgo);
         } else {
+            outgo.setModified_at(Timestamp.valueOf(LocalDateTime.now()));
             outgoDao.update(outgo);
         }
     }

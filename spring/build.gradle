@@ -35,12 +35,11 @@ repositories {
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-jdbc"
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-security")
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.seasar.doma.boot:doma-spring-boot-starter:1.1.1"
-    compile "com.google.cloud.sql:mysql-socket-factory-connector-j-6:1.0.9"
     compileOnly "org.projectlombok:lombok:1.18.0"
-    runtime "mysql:mysql-connector-java:6.0.6"
+    runtime "org.postgresql:postgresql"
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile "org.powermock:powermock-module-junit4:${versions.powermock}"
     testCompile "org.powermock:powermock-api-mockito:${versions.powermock}"
