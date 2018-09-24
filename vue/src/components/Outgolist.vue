@@ -19,6 +19,9 @@
         <b-table-column field="category" label="Category">
           {{ props.row.category }}
         </b-table-column>
+        <b-table-column field="created_at" label="created_at">
+          {{ props.row.created_at }}
+        </b-table-column>
         <b-table-column width="110">
           <nobr>
             <button class="button" @click="edit(props.index)">Edit</button>

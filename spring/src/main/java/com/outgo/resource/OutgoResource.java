@@ -1,5 +1,7 @@
 package com.outgo.resource;
 
+import java.text.SimpleDateFormat;
+
 import com.outgo.domain.Status;
 import com.outgo.model.Outgo;
 
@@ -9,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class OutgoResource {
+    private String created_at;
     private long id;
     private String status;
     private String buyer;
@@ -16,6 +19,8 @@ public class OutgoResource {
     private String category;
 
     public OutgoResource(Outgo outgo) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+        created_at = sdf.format(outgo.getCreated_at());
         id = outgo.getId();
         status = outgo.getStatus().getValue();
         buyer = outgo.getBuyer();
