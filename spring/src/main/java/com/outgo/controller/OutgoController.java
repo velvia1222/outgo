@@ -1,7 +1,7 @@
 package com.outgo.controller;
 
-import com.outgo.resource.OutgoIdsResource;
-import com.outgo.resource.OutgoResource;
+import com.outgo.form.OutgoIdsForm;
+import com.outgo.form.OutgoForm;
 import com.outgo.service.OutgoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,31 +21,31 @@ public class OutgoController {
     private OutgoService outgoService;
 
     @RequestMapping(path = "/api/outgoes", method = RequestMethod.GET)
-    public List<OutgoResource> get() {
+    public List<OutgoForm> get() {
         return outgoService.findNonProcessing();
     }
 
     @RequestMapping(path = "/api/outgoes", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void post(@RequestBody OutgoResource outgoResource) {
-        outgoService.register(outgoResource);
+    public void post(@RequestBody OutgoForm outgoForm) {
+        outgoService.register(outgoForm);
     }
 
     @RequestMapping(path = "/api/outgoes", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void put(@RequestBody OutgoResource outgoResource) {
-        outgoService.update(outgoResource);
+    public void put(@RequestBody OutgoForm outgoForm) {
+        outgoService.update(outgoForm);
     }
 
     @RequestMapping(path = "/api/outgoes/", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@RequestBody OutgoIdsResource outgoIdsResource) {
-        outgoService.delete(outgoIdsResource);
+    public void delete(@RequestBody OutgoIdsForm outgoIdsForm) {
+        outgoService.delete(outgoIdsForm);
     }
 
     @RequestMapping(path = "/api/outgoes/pay", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void pay(@RequestBody OutgoIdsResource outgoIdsResource) {
-        outgoService.pay(outgoIdsResource);
+    public void pay(@RequestBody OutgoIdsForm outgoIdsForm) {
+        outgoService.pay(outgoIdsForm);
     }
 }

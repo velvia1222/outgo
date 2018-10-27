@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
+import com.outgo.domain.Buyer;
 import com.outgo.domain.Status;
 
 import org.seasar.doma.Entity;
@@ -25,14 +26,14 @@ public class Outgo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Status status;
-    private String buyer;
+    private Buyer buyer;
     private long amount;
     private String category;
 
     public Outgo(
             long id,
             Status status,
-            String buyer,
+            Buyer buyer,
             long amount,
             String category) {
         this.id = id;

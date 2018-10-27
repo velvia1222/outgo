@@ -1,10 +1,10 @@
-package com.outgo.resource;
+package com.outgo.form;
 
 import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class OutgoIdsResource {
+public class OutgoIdsForm {
     private List<Long> ids;
 }
