@@ -3,7 +3,6 @@ package com.outgo.model;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.outgo.domain.Buyer;
 import com.outgo.domain.Status;
@@ -11,6 +10,7 @@ import com.outgo.form.SlackPostForm;
 import com.outgo.form.SlackPostForm.Action;
 import com.outgo.form.SlackPostForm.Attachment;
 import com.outgo.form.SlackPostForm.Option;
+import com.outgo.repository.CompletedMessageRepository;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -60,21 +60,12 @@ public class OutgoBot extends SlackBot {
         confirmed = false;
     }
 
-    public void reply() {
+    public void reply(CompletedMessageRepository completedMessageRepository) {
         if (confirmed) {
-            List<String> confirmMessages = new ArrayList<>();
-            confirmMessages.add("May the force be with you.");
-            confirmMessages.add("Patience you must have, my young Padawan.");
-            confirmMessages.add("Power! Unlimited power!");
-            confirmMessages.add("The time has come. Execute Order 66.");
-            confirmMessages.add("It's over Anakin! I have the high ground!");
-            confirmMessages.add("The Emperor is not as forgiving as I am.");
-            confirmMessages.add("I am your father.");
-            postMessage("outgo", confirmMessages.get(
-                        new Random().nextInt(confirmMessages.size())));
+            postMessage("outgo", completedMessageRepository.findAll().getOneAtRandom());
             clear();
         } else if (amount < 1) {
-            postMessage("outgo", "金額を入力せよ！");
+            postMessage("outgo", "Enter the amount of money.");
         } else if (category == null) {
             postCategoryList();
         } else {
@@ -85,7 +76,7 @@ public class OutgoBot extends SlackBot {
     private void postCategoryList() {
         SlackPostForm slackPostForm = new SlackPostForm();
         slackPostForm.setChannel("outgo");
-        slackPostForm.setText("カテゴリを選択せよ！");
+        slackPostForm.setText("Select a category.");
         Attachment attachment = new Attachment();
         attachment.setCallback_id("select_category");
         Action action = new Action();
@@ -136,7 +127,7 @@ public class OutgoBot extends SlackBot {
     private void postConfirmButton() {
         SlackPostForm slackPostForm = new SlackPostForm();
         slackPostForm.setChannel("outgo");
-        slackPostForm.setText(String.format("問題が無ければOKを押すべし！\n　金額：%s\n　カテゴリ：%s",
+        slackPostForm.setText(String.format("If there is no problem, press OK.\n  Amount:%s\n Category:%s",
                     String.valueOf(amount), category));
         Attachment attachment = new Attachment();
         attachment.setCallback_id("confirm");

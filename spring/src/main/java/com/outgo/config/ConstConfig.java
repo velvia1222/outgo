@@ -24,7 +24,7 @@ public class ConstConfig {
     }
 
     @Component
-    @ConfigurationProperties(prefix = "slack.userId")
+    @ConfigurationProperties(prefix = "slack.user.id")
     @Data
     public static class SlackUserId {
         private String n;

@@ -2,6 +2,7 @@ package com.outgo.service;
 
 import com.outgo.form.SlackForm;
 import com.outgo.model.OutgoBot;
+import com.outgo.repository.CompletedMessageRepository;
 import com.outgo.repository.OutgoBotRepository;
 import com.outgo.repository.OutgoRepository;
 
@@ -15,6 +16,8 @@ public class OutgoBotAsyncService {
     private OutgoBotRepository outgoBotRepository;
     @Autowired
     private OutgoRepository outgoRepository;
+    @Autowired
+    private CompletedMessageRepository completedMessageRepository;
 
     @Async
     public void reply(SlackForm form) {
@@ -23,7 +26,7 @@ public class OutgoBotAsyncService {
         if (outgoBot.isConfirmed()) {
             outgoRepository.save(outgoBot.toOutgo());
         }
-        outgoBot.reply();
+        outgoBot.reply(completedMessageRepository);
         outgoBotRepository.save(outgoBot);
     }
 }
