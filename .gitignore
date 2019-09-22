@@ -7,7 +7,6 @@ node_modules/
 npm-debug.log
 yarn-error.log
 spring/src/main/resources/config/application.yml
-docker/docker-compose.yml
 docker/mysql/docker-entrypoint-initdb.d/create_db.sql
 docker/postgres/initdb.d/1-init.sql
 docker/postgres/initdb.d/2-table-data.sh
