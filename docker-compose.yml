@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.7'
 services:
     db:
         image: postgres:9
@@ -6,6 +6,6 @@ services:
         environment:
             POSTGRES_PASSWORD: postgres
         volumes:
-            - ./postgres/initdb.d:/docker-entrypoint-initdb.d
+            - ./docker/postgres/initdb.d:/docker-entrypoint-initdb.d
         ports:
             - "5432:5432"
