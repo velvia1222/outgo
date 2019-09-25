@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+doma:
+  dialect: postgres
+  sql-file-repository: no_cache
+slack:
+  token:
+    verification: ${SLACK_TOKEN}
+    botAccess: ${SLACK_BOT_ACCESS}
+  user:
+    Id:
+      n: U1L6TKA67
+      y: U1L84JGG0
+  url:
+    postMessage: https://slack.com/api/chat.postMessage

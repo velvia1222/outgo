@@ -1,6 +1,5 @@
 .gradle
 .project
-.DS_Store
 spring/bin/
 spring/build/
 spring/src/main/gen/
@@ -8,4 +7,3 @@ spring/src/main/resources/public/dist/
 node_modules/
 npm-debug.log
 yarn-error.log
-spring/src/main/resources/config/application.yml

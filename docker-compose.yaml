@@ -20,6 +20,8 @@ services:
             - "JDBC_DATABASE_URL=jdbc:postgresql://db:5432/outgo"
             - "JDBC_DATABASE_USERNAME=postgres"
             - "JDBC_DATABASE_PASSWORD=postgres"
+            - SLACK_TOKEN
+            - SLACK_BOT_ACCESS
         ports:
             - "8080:8080"
         entrypoint:
