@@ -1,14 +1,14 @@
-import Vue from 'vue'
-import router from './router'
-import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
-import App from './App.vue'
+import Vue from "vue";
+import router from "./router";
+import Buefy from "buefy";
+import "buefy/dist/buefy.css";
+import App from "./App.vue";
 
-Vue.use(Buefy)
+Vue.use(Buefy);
 
 new Vue({
-  el: '#app',
+  el: "#app",
   router,
   components: { App },
-  template: '<App/>'
-})
+  template: "<App/>",
+});
