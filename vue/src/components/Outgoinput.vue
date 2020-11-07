@@ -18,6 +18,7 @@
           <option>日用品</option>
           <option>外食費</option>
           <option>娯楽</option>
+          <option>勉強</option>
           <option>光熱費</option>
           <option>家賃</option>
         </select>

@@ -9,26 +9,24 @@
       :checked-rows.sync="checkedRows"
       :mobile-cards="false"
       checkable>
-      <template slot-scope="props">
-        <b-table-column field="buyer" label="Buyer" width="70">
-          {{ props.row.buyer }}
-        </b-table-column>
-        <b-table-column field="amount" label="Amount" width="100" numeric>
-          {{ props.row.amount }}
-        </b-table-column>
-        <b-table-column field="category" label="Category">
-          {{ props.row.category }}
-        </b-table-column>
-        <b-table-column field="created_at" label="created_at">
-          {{ props.row.created_at }}
-        </b-table-column>
-        <b-table-column width="110">
-          <nobr>
-            <button class="button" @click="edit(props.index)">Edit</button>
-            <button class="button" @click="confirmRemove(props.index)">Remove</button>
-          </nobr>
-        </b-table-column>
-      </template>
+      <b-table-column field="buyer" label="Buyer" width="70" v-slot="props">
+        {{ props.row.buyer }}
+      </b-table-column>
+      <b-table-column field="amount" label="Amount" width="100" numeric v-slot="props">
+        {{ props.row.amount }}
+      </b-table-column>
+      <b-table-column field="category" label="Category" v-slot="props">
+        {{ props.row.category }}
+      </b-table-column>
+      <b-table-column field="created_at" label="created_at" v-slot="props">
+        {{ props.row.created_at }}
+      </b-table-column>
+      <b-table-column width="110">
+        <nobr>
+          <button class="button" @click="edit(props.index)">Edit</button>
+          <button class="button" @click="confirmRemove(props.index)">Remove</button>
+        </nobr>
+      </b-table-column>
     </b-table>
   </section>
 </template>
