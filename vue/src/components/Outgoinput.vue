@@ -24,7 +24,7 @@
       </div>
     </b-field>
     <b-field>
-      <button class="button" @click="goList">Cancel</button>
+      <button class="button" @click="goList">List</button>
       <button class="button is-info" @click="enter">Enter</button>
     </b-field>
   </section>
