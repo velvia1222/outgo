@@ -28,7 +28,7 @@
       <b-table-column field="created_at" label="created_at" v-slot="props">
         {{ props.row.created_at }}
       </b-table-column>
-      <b-table-column width="110">
+      <b-table-column width="110" v-slot="props">
         <nobr>
           <button class="button" @click="edit(props.index)">Edit</button>
           <button class="button" @click="confirmRemove(props.index)">
@@ -86,7 +86,7 @@ export default {
     },
     confirmRemove(index) {
       let outgo = this.outgoes[index];
-      this.$dialog.confirm({
+      this.$buefy.dialog.confirm({
         message: outgo.buyer + " " + outgo.amount + "を削除します",
         onConfirm: () => this.remove(index),
       });
@@ -129,7 +129,7 @@ export default {
         payer = "y";
         payment = Math.floor((amountN - amountY) / 2);
       }
-      this.$dialog.confirm({
+      this.$buefy.dialog.confirm({
         message: payer + "が" + payment + "円支払ってください",
         onConfirm: () => this.pay(),
       });
@@ -148,7 +148,7 @@ export default {
         },
         data: { ids: ids },
       }).then((response) => {
-        this.$toast.open("Pay!");
+        this.$buefy.toast.open("Paied!");
         this.fetchOutgoes();
         this.loading = false;
       });
