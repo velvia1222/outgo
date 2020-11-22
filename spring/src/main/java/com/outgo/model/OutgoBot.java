@@ -9,7 +9,6 @@ import com.outgo.domain.Status;
 import com.outgo.form.SlackPostForm;
 import com.outgo.form.SlackPostForm.Action;
 import com.outgo.form.SlackPostForm.Attachment;
-import com.outgo.form.SlackPostForm.Option;
 import com.outgo.repository.CompletedMessageRepository;
 
 import org.springframework.http.MediaType;
@@ -83,32 +82,15 @@ public class OutgoBot extends SlackBot {
         action.setName("category_list");
         action.setText("Select category...");
         action.setType("select");
-        Option option1 = new Option();
-        option1.setText("食費");
-        option1.setValue("食費");
-        Option option2 = new Option();
-        option2.setText("日用品");
-        option2.setValue("日用品");
-        Option option3 = new Option();
-        option3.setText("外食費");
-        option3.setValue("外食費");
-        Option option4 = new Option();
-        option4.setText("娯楽");
-        option4.setValue("娯楽");
-        Option option5 = new Option();
-        option5.setText("光熱費");
-        option5.setValue("光熱費");
-        Option option6 = new Option();
-        option6.setText("家賃");
-        option6.setValue("家賃");
-        List<Option> options = new ArrayList<>(2);
-        options.add(option1);
-        options.add(option2);
-        options.add(option3);
-        options.add(option4);
-        options.add(option5);
-        options.add(option6);
-        action.setOptions(options);
+        action.setOptions(SlackPostForm.buildOptions(
+            "食費",
+            "日用品",
+            "外食費",
+            "娯楽",
+            "勉強",
+            "光熱費",
+            "家賃"
+        ));
         List<Action> actions = new ArrayList<>(1);
         actions.add(action);
         attachment.setActions(actions);

@@ -1,5 +1,6 @@
 package com.outgo.form;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -36,5 +37,16 @@ public class SlackPostForm {
     public static class Option {
         String text;
         String value;
+    }
+
+    public static List<Option> buildOptions(String... optionStrs) {
+        List<Option> options = new ArrayList<>();
+        for (String optionStr : optionStrs) {
+            Option option = new Option();
+            option.setText(optionStr);
+            option.setValue(optionStr);
+            options.add(option);
+        }
+        return options;
     }
 }
