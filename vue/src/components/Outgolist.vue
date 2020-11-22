@@ -1,7 +1,7 @@
 <template>
   <section class="section" style="width:550px">
     <b-field>
-      <button class="button" @click="goInput">Back</button>
+      <button class="button" @click="goInput">Input</button>
       <button class="button is-info" @click="confirmPay">Pay</button>
     </b-field>
     <b-table
